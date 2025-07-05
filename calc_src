@@ -4,17 +4,17 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        
-        
+
+
         int choice;
         double num1;
         double num2;
         ArrayList<Double> resultList = new ArrayList<>();
+        Scanner input = new Scanner(System.in);
 
         loop:
         while (true) {
 
-            Scanner input = new Scanner(System.in);
             System.out.println("------ welcome to calculator ------");
             System.out.println("1 - addition");
             System.out.println("2 - subtraction");
@@ -83,7 +83,11 @@ public class Main {
                         System.out.println("Enter numbers only!");
                         continue;
                     }
-                    division(num1, num2, resultList);
+                    try {
+                        System.out.println("The result is " + division(num1, num2, resultList));
+                    } catch (ArithmeticException e) {
+                        System.out.println("Error: "  +e.getMessage());
+                    }
                     break;
                 case 5:
                     try{
@@ -95,7 +99,11 @@ public class Main {
                         System.out.println("Enter numbers only!");
                         continue;
                     }
-                    System.out.println("The result is " + modulus(num1, num2, resultList));
+                    try {
+                        System.out.println("The result is " + modulus(num1, num2, resultList));
+                    }catch (ArithmeticException e){
+                        System.out.println("Error: " +e.getMessage());
+                    }
                     break;
                 case 6:
                     // what I understood from this that this shall get the max result :)
@@ -103,10 +111,11 @@ public class Main {
                         if (resultList.isEmpty()) {
                             throw new Exception("there is no result");
                         }
+                        System.out.println("The maximum number is " + maximum(resultList));
                     } catch (Exception e) {
                         System.out.println(e.getMessage());
+                        continue;
                     }
-                    System.out.println("The maximum number is " + maximum(resultList));
                     break;
                 case 7:
                     // what I understood from this that this shall get the min result :)
@@ -114,10 +123,11 @@ public class Main {
                         if (resultList.isEmpty()) {
                             throw new Exception("there is no result");
                         }
+                        System.out.println("The minimum number is " + minimum(resultList));
                     } catch (Exception e) {
                         System.out.println(e.getMessage());
+                        continue;
                     }
-                    System.out.println("The minimum number is " + minimum(resultList));
                     break;
                 case 8:
                     try{
@@ -171,7 +181,7 @@ public class Main {
         return num1 * num2;
     }
 
-    public static double division(double num1, double num2, ArrayList<Double> resultList) {
+    public static double division(double num1, double num2, ArrayList<Double> resultList) throws ArithmeticException {
         if (num2 == 0) {
             throw new ArithmeticException("division by zero");
         }
@@ -179,7 +189,7 @@ public class Main {
         return num1 / num2;
     }
 
-    public static double modulus(double num1, double num2, ArrayList<Double> resultList) {
+    public static double modulus(double num1, double num2, ArrayList<Double> resultList) throws ArithmeticException {
         if (num2 == 0) {
             throw new ArithmeticException("division by zero");
         }
@@ -214,6 +224,7 @@ public class Main {
     }
 
     public static void allResults(ArrayList<Double> resultList) {
+
         for (double result : resultList) {
             System.out.println(result);
         }
