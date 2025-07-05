@@ -1,0 +1,169 @@
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+
+        double num1;
+        double num2;
+        ArrayList<Double> resultList = new ArrayList<>();
+
+        loop:
+        while (true) {
+
+        Scanner input = new Scanner(System.in);
+        System.out.println("------ welcome to calculator ------");
+        System.out.println("1 - addition");
+        System.out.println("2 - subtraction");
+        System.out.println("3 - multiplication");
+        System.out.println("4 - division");
+        System.out.println("5 - modulus");
+        System.out.println("6 - find maximum number");
+        System.out.println("7 - find minimum number");
+        System.out.println("8 - find the average of numbers");
+        System.out.println("9 - print the last result in calculator");
+        System.out.println("10 - print the list of all results in calculator");
+        System.out.println("11 - exit");
+        System.out.print("Please enter your choice: ");
+        int choice = input.nextInt();
+
+
+            switch (choice) {
+                case 1:
+                    System.out.print("Please enter the first number: ");
+                    num1 = input.nextDouble();
+                    System.out.print("Please enter the second number: ");
+                    num2 = input.nextDouble();
+                    System.out.println("The result is " + addition(num1, num2,resultList));
+                    break;
+                case 2:
+                    System.out.print("Please enter the first number: ");
+                    num1 = input.nextDouble();
+                    System.out.print("Please enter the second number: ");
+                    num2 = input.nextDouble();
+                    System.out.println("The result is " + subtraction(num1, num2,resultList));
+                    break;
+                case 3:
+                    System.out.println("Please enter the first number: ");
+                    num1 = input.nextDouble();
+                    System.out.println("Please enter the second number: ");
+                    num2 = input.nextDouble();
+                    System.out.println("The result is " + multiplication(num1, num2,resultList));
+                    break;
+                case 4:
+                    System.out.println("Please enter the first number: ");
+                    num1 = input.nextDouble();
+                    System.out.println("Please enter the second number: ");
+                    num2 = input.nextDouble();
+                   division(num1, num2,resultList);
+                    break;
+                case 5:
+                    System.out.println("Please enter the first number: ");
+                    num1 = input.nextDouble();
+                    System.out.println("Please enter the second number: ");
+                    num2 = input.nextDouble();
+                    System.out.println("The result is " + modulus(num1, num2,resultList));
+                    break;
+                case 6:
+                    System.out.println("Please enter the first number: ");
+                    num1 = input.nextDouble();
+                    System.out.println("Please enter the second number: ");
+                    num2 = input.nextDouble();
+                    System.out.println("The maximum number is " + maximum(num1, num2,resultList));
+                    break;
+                case 7:
+                    System.out.println("Please enter the first number: ");
+                    num1 = input.nextDouble();
+                    System.out.println("Please enter the second number: ");
+                    num2 = input.nextDouble();
+                    System.out.println("The minimum number is " + minimum(num1, num2,resultList));
+                    break;
+                case 8:
+                    System.out.println("Please enter the first number: ");
+                    num1 = input.nextDouble();
+                    System.out.println("Please enter the second number: ");
+                    num2 = input.nextDouble();
+                    System.out.println("The average is " + average(num1, num2,resultList));
+                    break;
+                case 9:
+                    if (!resultList.isEmpty()) {
+                        System.out.println("The last result is " + resultList.get(resultList.size() - 1));
+                    } else {
+                        System.out.println("There is no result");
+                    }
+                    break;
+                case 10:
+                    if (!resultList.isEmpty()) {
+                        System.out.println("The list of all results is: ");
+                        allResults(resultList);
+                    } else {
+                        System.out.println("There is no result");
+                    }
+                    break;
+                case 11:
+                    System.out.println("\n*** Goodbye!");
+                    break loop;
+                default:
+                    System.out.println("Wrong choice!");
+
+            }
+        }
+    }
+
+    public static double addition(double num1, double num2,ArrayList<Double> resultList) {
+        resultList.add(num1 + num2);
+        return num1 + num2;
+    }
+    public static double subtraction(double num1, double num2,ArrayList<Double> resultList) {
+        resultList.add(num1 - num2);
+        return num1 - num2;
+    }
+    public static double multiplication(double num1, double num2,ArrayList<Double> resultList) {
+        resultList.add(num1 * num2);
+        return num1 * num2;
+    }
+    public static double division(double num1, double num2,ArrayList<Double> resultList) {
+        if (num2 == 0) {
+            throw new ArithmeticException("division by zero");
+        }
+        resultList.add(num1 / num2);
+        return num1 / num2;
+    }
+    public static double modulus(double num1, double num2,ArrayList<Double> resultList) {
+        if (num2 == 0) {
+            throw new ArithmeticException("division by zero");
+        }
+        resultList.add(num1 % num2);
+        return num1 % num2;
+    }
+    public static double maximum(double num1, double num2,ArrayList<Double> resultList) {
+        if (num1 > num2) {
+            resultList.add(num1);
+            return num1;
+        } else {
+            resultList.add(num2);
+            return num2;
+        }
+    }
+    public static double minimum(double num1, double num2,ArrayList<Double> resultList) {
+        if (num1 < num2) {
+            resultList.add(num1);
+            return num1;
+        } else {
+            resultList.add(num2);
+            return num2;
+        }
+    }
+    public static double average(double num1, double num2,ArrayList<Double> resultList) {
+        resultList.add((num1 + num2) / 2);
+        return (num1 + num2) / 2;
+    }
+
+    public static void allResults(ArrayList<Double> resultList) {
+        for (double result : resultList) {
+            System.out.println(result);
+        }
+    }
+
+
+}
